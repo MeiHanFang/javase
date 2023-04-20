@@ -1,0 +1,62 @@
+1、说出进程和线程的区别
+进程：正在执行的应用程序
+线程：应用程序的执行单元/执行路径
+如果一个进程有多个执行路径 那它就是多线程
+
+2、（重点）实现多线程的三种方式
+    Thread
+    Runnable
+    Callable    对象在未来哈哈哈哈哈哈哈哈哈哈哈哈
+
+3、相关API
+    设置和获取线程名称
+    获取当前正在执行的线程对象
+    获取和设置线程的优先级
+    线程休眠
+
+4、能够说出线程的6种状态。知道什么操作导致线程进入这种状态。Thread.State
+当创建线程对象时，线程就会进入NEW新建状态，调用了start方法进入RUNNABLE就绪状态，如果获取到资源正常执行完，end进入TERMINATED消亡状态,这
+是一条正常的线。如果在执行的过程中，调用了join(long)、sleep(long)、wait(long)这些方法，就会进入TIMED_WAITING计时等待状态，只有当超时
+或者超时之前被别人唤醒才能回到就绪状态。如果调用了join、sleep、wait这些方法，就会进入WAITING永久等待状态，只有被别人唤醒才能回到就绪状态。
+如果获取不到资源，就会进入BLOCKED阻塞状态，如果获取到资源回到就绪状态。
+
+5、（重点）能够分析出什么时候需要线程的同步控制。
+    多条线程操作共享资源，并且对共享资源作出修改。
+    解决方案：
+        synchronized
+        Lock接口 互斥锁
+    注意：多条线程使用的锁对象必须是同一个。
+
+6、（面试）能够说出什么是死锁 以及 如何避免
+死锁是两个或两个以上的线程互相持有对方所需要的资源，导致这些线程处于等待状态，无法执行。
+破坏死锁的四个必要条件（互斥条件、请求与保持条件、不可剥夺条件、循环等待条件）之一
+
+7、掌握阻塞队列的使用 实现生产者消费者模式
+阻塞队列ArrayBlockingQueue的put和take方法内部实现锁 不用在外部判断
+
+8、线程池
+    单线程化线程池
+    固定数量的线程池
+    可缓存线程池
+
+    掌握线程池的标准创建方式
+    public ThreadPoolExecutor(int corePoolSize,						// 核心线程数量
+                              int maximumPoolSize,					// 最大线程数量
+                              long keepAliveTime,					// 空闲线程存活时间（值）
+                              TimeUnit unit,						// 空闲线程存活时间（单位）
+                              BlockingQueue<Runnable> workQueue,	// 阻塞队列
+                              ThreadFactory threadFactory,			// 新线程的创建工厂（产生方式）
+                              RejectedExecutionHandler handler)		// 拒绝策略
+
+    拒绝策略：
+        ThreadPoolExecutor类的四个内部类
+         AbortPolicy 拒绝新任务 并且抛出异常（默认）
+         CallerRunsPolicy 绕过线程池 调用run方法
+         DiscardOldestPolicy 抛弃等待时间最久的任务
+         DiscardPolicy 静默的拒绝任务（不建议）
+
+9、（面试）掌握ConcurrentHashMap的线程安全原理
+            数据结构
+数组+链表+红黑树
+CAS算法 + synchronized 机制
+它不是锁整张表而是锁一个节点 当别的线程没有跟它访问同一个线程时不需要等待 只有和它访问的是同一个节点时才需要等待

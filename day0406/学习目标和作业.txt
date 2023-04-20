@@ -1,0 +1,45 @@
+1、说出进程和线程的区别
+
+2、（重点）实现多线程的三种方式
+    Thread
+    Runnable
+    Callable
+
+3、相关API
+    设置和获取线程名称
+    获取当前正在执行的线程对象
+    获取和设置线程的优先级
+    线程休眠
+
+4、能够说出线程的6种状态。知道什么操作导致线程进入这种状态。Thread.State
+
+5、（重点）能够分析出什么时候需要线程的同步控制。
+    多条线程操作共享资源，并且对共享资源作出修改。
+    解决方案：
+        synchronized
+        Lock接口 互斥锁
+    注意：多条线程使用的锁对象必须是同一个。
+6、（面试）能够说出什么是死锁 以及 如何避免
+
+
+7、掌握阻塞队列的使用 实现生产者消费者模式
+
+8、线程池
+    单线程化线程池
+    固定数量的线程池
+    可缓存线程池
+
+    掌握线程池的标准创建方式
+    public ThreadPoolExecutor(int corePoolSize,						// 核心线程数量
+                              int maximumPoolSize,					// 最大线程数量
+                              long keepAliveTime,					// 空闲线程存活时间（值）
+                              TimeUnit unit,						// 空闲线程存活时间（单位）
+                              BlockingQueue<Runnable> workQueue,	// 阻塞队列
+                              ThreadFactory threadFactory,			// 新线程的创建工厂（产生方式）
+                              RejectedExecutionHandler handler)		// 拒绝策略
+
+    拒绝策略：
+        ThreadPoolExecutor类的四个内部类
+
+9、（面试）掌握ConcurrentHashMap的线程安全原理
+            数据结构
